@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/code/app  # Hot-reload: Changes in code update instantly
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:5173"
+    volumes:
+      - ./frontend/src:/app/src  # Hot-reload for React
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8000 # React needs to know where Backend is
