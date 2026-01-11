@@ -70,7 +70,3 @@ server-capacity-forecaster/
 │   └── package.json
 └── docker-compose.yml
 ```
-
-## License
-
-MIT
